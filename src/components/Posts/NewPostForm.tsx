@@ -117,14 +117,14 @@ const NewPostForm: React.FC<NewPostProps> = ({ user }) => {
   return (
     <Flex direction="column" bg="white" borderRadius={4} mt={2}>
       <Flex width="100%">
-        {formTabs.map((item) => (
-          <>
+        {formTabs.map((item, i) => (
+          <React.Fragment key={i}>
             <TabItem
               item={item}
               selected={item.title === selectedTab}
               setSelectedTab={setSelectedTab}
             />
-          </>
+          </React.Fragment>
         ))}
       </Flex>
       <Flex p={4}>

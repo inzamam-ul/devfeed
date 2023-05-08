@@ -30,6 +30,7 @@ interface postState {
 
 const defaultPostState: postState = {
   selectedPost: null,
+  postVotes: [],
   posts: [],
 };
 
