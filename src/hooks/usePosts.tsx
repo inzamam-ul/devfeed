@@ -159,7 +159,7 @@ const usePosts = () => {
         }));
       }
 
-      const postRef = doc(firestore, "posts", post.id);
+      const postRef = doc(firestore, "posts", post?.id as string);
       batch.update(postRef, {
         voteStatus: voteStatus && voteStatus + voteChange,
       });
