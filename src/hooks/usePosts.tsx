@@ -70,7 +70,7 @@ const usePosts = () => {
 
         batch.set(postVoteRef, newVote);
 
-        updatedPost.voteStatus = voteStatus + vote;
+        updatedPost.voteStatus = voteStatus && voteStatus + vote;
         updatedPostVotes = [...updatedPostVotes, newVote];
       }
       // Removing existing vote
@@ -85,14 +85,14 @@ const usePosts = () => {
         // Removing vote
         if (existingVote.voteValue === vote) {
           voteChange *= -1;
-          updatedPost.voteStatus = voteStatus - vote;
+          updatedPost.voteStatus = voteStatus && voteStatus - vote;
           updatedPostVotes = updatedPostVotes.filter(
             (vote) => vote.id !== existingVote.id
           );
           batch.delete(postVoteRef);
         } else {
           voteChange = 2 * vote;
-          updatedPost.voteStatus = voteStatus + 2 * vote;
+          updatedPost.voteStatus = voteStatus && voteStatus + 2 * vote;
           const voteIdx = postStateValue.postVotes.findIndex(
             (vote) => vote.id === existingVote.id
           );
@@ -160,7 +160,9 @@ const usePosts = () => {
       }
 
       const postRef = doc(firestore, "posts", post.id);
-      batch.update(postRef, { voteStatus: voteStatus + voteChange });
+      batch.update(postRef, {
+        voteStatus: voteStatus && voteStatus + voteChange,
+      });
       await batch.commit();
     } catch (error) {
       console.log("onVote error", error);
