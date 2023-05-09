@@ -4,6 +4,7 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
   Flex,
   Icon,
+  Image,
   Menu,
   MenuButton,
   MenuItem,
@@ -14,14 +15,16 @@ import { signOut } from "firebase/auth";
 import React from "react";
 import { MdOutlineLogin } from "react-icons/md";
 import { VscAccount } from "react-icons/vsc";
-import { TiHome } from "react-icons/ti";
+import { TiGroupOutline, TiHome } from "react-icons/ti";
 import { useSetRecoilState } from "recoil";
 import Communities from "./Communities";
+import useDirectory from "@/hooks/useDirectoy";
 
 const Directory: React.FC = () => {
   const setAuthModalState = useSetRecoilState(authModalState);
+  const { directoryState, toggleMenuOpen } = useDirectory();
   return (
-    <Menu>
+    <Menu isOpen={directoryState.isOpen}>
       <MenuButton
         cursor="pointer"
         padding="0px 0px"
@@ -29,6 +32,7 @@ const Directory: React.FC = () => {
         ml={{ base: 3, md: 3 }}
         mr={2}
         _hover={{ outline: "1px solid", outlineColor: "gray.200" }}
+        onClick={toggleMenuOpen}
       >
         <Flex
           align="center"
@@ -36,15 +40,28 @@ const Directory: React.FC = () => {
           width={{ base: "auto", lg: "200px" }}
         >
           <Flex align="center">
-            <Icon
-              as={TiHome}
-              color="gray.700"
-              fontSize={24}
-              mr={{ base: 1, md: 1 }}
-            />
+            {directoryState.selectedMenuItem.imageURL ? (
+              <Image
+                borderRadius="full"
+                boxSize="24px"
+                src={directoryState.selectedMenuItem.imageURL}
+                mr={2}
+              />
+            ) : (
+              <Icon
+                as={TiGroupOutline}
+                color="white"
+                bg="blue.400"
+                rounded="full"
+                p="3px"
+                fontSize={24}
+                mr={{ base: 1, md: 1 }}
+              />
+            )}
+
             <Flex display={{ base: "none", lg: "flex" }}>
               <Text fontWeight={600} fontSize="10pt">
-                Home
+                {directoryState.selectedMenuItem.displayText}
               </Text>
             </Flex>
           </Flex>

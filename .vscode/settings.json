@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["firestore"]
+  "cSpell.words": ["firestore"],
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }

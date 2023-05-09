@@ -17,6 +17,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { doc, runTransaction, serverTimestamp } from "firebase/firestore";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { BsFillEyeFill, BsFillPersonFill } from "react-icons/bs";
@@ -31,6 +32,7 @@ const CreateCommunityModal: React.FC<CreateCommunityProps> = ({
   open,
   handleClose,
 }) => {
+  const router = useRouter();
   const [user] = useAuthState(auth);
   const [communityName, setCommunityName] = useState("");
   const [characterRemaining, setCharacterRemaining] = useState(21);
@@ -96,7 +98,12 @@ const CreateCommunityModal: React.FC<CreateCommunityProps> = ({
     }
 
     //create the community document int firestore
-
+    setSnippetState((prev) => ({
+      ...prev,
+      mySnippets: [],
+    }));
+    handleClose();
+    router.push(`r/${communityName}`);
     setLoading(false);
   };
 
@@ -236,3 +243,6 @@ const CreateCommunityModal: React.FC<CreateCommunityProps> = ({
   );
 };
 export default CreateCommunityModal;
+function setSnippetState(arg0: (prev: any) => any) {
+  throw new Error("Function not implemented.");
+}
