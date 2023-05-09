@@ -1,4 +1,5 @@
 import { auth, firestore } from "@/firebase/clientApp";
+import useDirectory from "@/hooks/useDirectoy";
 import {
   Box,
   Button,
@@ -39,7 +40,7 @@ const CreateCommunityModal: React.FC<CreateCommunityProps> = ({
   const [communityType, setCommunityType] = useState("public");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const { toggleMenuOpen } = useDirectory();
   const onCommunityTypeChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -92,18 +93,21 @@ const CreateCommunityModal: React.FC<CreateCommunityProps> = ({
           }
         );
       });
+
+      handleClose();
+      toggleMenuOpen();
+      router.push(`r/${communityName}`);
     } catch (error: any) {
       console.log("handleCreateCommunity error", error);
       setError(error?.message);
     }
 
     //create the community document int firestore
-    setSnippetState((prev) => ({
-      ...prev,
-      mySnippets: [],
-    }));
-    handleClose();
-    router.push(`r/${communityName}`);
+    // setSnippetState((prev) => ({
+    //   ...prev,
+    //   mySnippets: [],
+    // }));
+
     setLoading(false);
   };
 
@@ -243,6 +247,3 @@ const CreateCommunityModal: React.FC<CreateCommunityProps> = ({
   );
 };
 export default CreateCommunityModal;
-function setSnippetState(arg0: (prev: any) => any) {
-  throw new Error("Function not implemented.");
-}

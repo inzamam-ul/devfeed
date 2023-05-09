@@ -9,12 +9,14 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
+import { Image as ChakraImage } from "@chakra-ui/react";
 import moment from "moment";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { AiOutlineDelete } from "react-icons/ai";
-import { BsChat } from "react-icons/bs";
+import { BsChat, BsDot } from "react-icons/bs";
 import {
   IoArrowDownCircleOutline,
   IoArrowDownCircleSharp,
@@ -23,6 +25,7 @@ import {
   IoArrowUpCircleSharp,
   IoBookmarkOutline,
 } from "react-icons/io5";
+import { TiGroupOutline } from "react-icons/ti";
 
 type PostItemProps = {
   post: Post;
@@ -36,6 +39,7 @@ type PostItemProps = {
   ) => void;
   onDeletePost: (post: Post) => Promise<boolean>;
   onSelectPost?: (post: Post) => void;
+  homePage?: boolean;
 };
 
 const PostItem: React.FC<PostItemProps> = ({
@@ -45,6 +49,7 @@ const PostItem: React.FC<PostItemProps> = ({
   onDeletePost,
   onSelectPost,
   onVote,
+  homePage,
 }) => {
   const router = useRouter();
   const [error, setError] = React.useState("");
@@ -70,6 +75,8 @@ const PostItem: React.FC<PostItemProps> = ({
     }
     setLoading(false);
   };
+
+  console.log(post.communityImageURL);
 
   return (
     <Flex
@@ -120,6 +127,33 @@ const PostItem: React.FC<PostItemProps> = ({
         )}
         <Stack spacing={1} p="10px">
           <Stack direction="row" spacing={0.6} fontSize="9pt" align="center">
+            {homePage && (
+              <>
+                {post.communityImageURL ? (
+                  <ChakraImage
+                    borderRadius="full"
+                    boxSize="18px"
+                    src={post.communityImageURL}
+                    mr={2}
+                  />
+                ) : (
+                  <Icon
+                    as={TiGroupOutline}
+                    fontSize={18}
+                    mr={1}
+                    color="blue.500"
+                  />
+                )}
+                <Link href={`r/${post.communityId}`}>
+                  <Text
+                    fontWeight={700}
+                    _hover={{ textDecoration: "underline" }}
+                    onClick={(event) => event.stopPropagation()}
+                  >{`r/${post.communityId}`}</Text>
+                </Link>
+                <Icon as={BsDot} color="gray.500" fontSize={8} />
+              </>
+            )}
             <Text fontSize="9pt" color="gray.500">
               Posted by {post.creatorDisplayName}{" "}
               {moment(post.createdAt?.seconds * 1000).fromNow()}
