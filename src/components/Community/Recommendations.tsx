@@ -102,7 +102,7 @@ const Recommendations: React.FC<RecommendationsProps> = () => {
                 <Link
                   legacyBehavior={true}
                   key={item.id}
-                  href={`/r/${item.id}`}
+                  href={`/dev/${item.id}`}
                 >
                   <Flex
                     position="relative"
@@ -142,7 +142,7 @@ const Recommendations: React.FC<RecommendationsProps> = () => {
                             overflow: "hidden",
                             textOverflow: "ellipsis",
                           }}
-                        >{`r/${item.id}`}</span>
+                        >{`dev/${item.id}`}</span>
                       </Flex>
                     </Flex>
                     <Box position="absolute" zIndex={11} right="10px">

@@ -28,7 +28,7 @@ const CreatePostLink: React.FC<CreatePostProps> = () => {
     // Open directory menu to select community to post to
     const { communityId } = router.query;
     if (communityId) {
-      router.push(`/r/${communityId}/submit`);
+      router.push(`/dev/${communityId}/submit`);
       return;
     }
     toggleMenuOpen();

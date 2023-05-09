@@ -27,6 +27,8 @@ import { Post, PostVote } from "@/atoms/postAtom";
 import PostItem from "@/components/Posts/PostItem";
 import useCommunityData from "@/hooks/useCommunityData";
 import Recommendations from "@/components/Community/Recommendations";
+import Premium from "@/components/Community/Premium";
+import PersonalHome from "@/components/Community/PersonalHome";
 
 const Home: NextPage = () => {
   const [user, loadingUser] = useAuthState(auth);
@@ -225,8 +227,8 @@ const Home: NextPage = () => {
       </>
       <Stack spacing={5} position="sticky" top="14px">
         <Recommendations />
-        {/* <Premium /> */}
-        {/* <PersonalHome /> */}
+        <Premium />
+        <PersonalHome />
       </Stack>
     </PageContentLayout>
   );

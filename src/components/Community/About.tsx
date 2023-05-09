@@ -102,7 +102,7 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
               </Text>
             )}
           </Flex>
-          <Link href={`/r/${communityData.id}/submit`}>
+          <Link href={`/dev/${communityData.id}/submit`}>
             <Button width="100%" mt={3} height="30px">
               Create Post
             </Button>
