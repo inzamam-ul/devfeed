@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex, Icon, MenuItem, Image } from "@chakra-ui/react";
 import { IconType } from "react-icons";
-import useDirectory from "@/hooks/useDirectoy";
+import useDirectory from "@/hooks/useDirectory";
 
 type DirectoryItemProps = {
   displayText: string;

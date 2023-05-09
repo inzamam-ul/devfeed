@@ -1,6 +1,6 @@
 import { authModalState } from "@/atoms/authModalAtom";
 import { auth } from "@/firebase/clientApp";
-import useDirectory from "@/hooks/useDirectoy";
+import useDirectory from "@/hooks/useDirectory";
 import { Flex, Icon, Input } from "@chakra-ui/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -28,7 +28,7 @@ const CreatePostLink: React.FC<CreatePostProps> = () => {
     // Open directory menu to select community to post to
     const { communityId } = router.query;
     if (communityId) {
-      router.push(`/dev/${communityId}/submit`);
+      router.push(`/r/${communityId}/submit`);
       return;
     }
     toggleMenuOpen();

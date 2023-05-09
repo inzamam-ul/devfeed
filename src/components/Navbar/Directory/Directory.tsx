@@ -18,7 +18,7 @@ import { VscAccount } from "react-icons/vsc";
 import { TiGroupOutline, TiHome } from "react-icons/ti";
 import { useSetRecoilState } from "recoil";
 import Communities from "./Communities";
-import useDirectory from "@/hooks/useDirectoy";
+import useDirectory from "@/hooks/useDirectory";
 
 const Directory: React.FC = () => {
   const setAuthModalState = useSetRecoilState(authModalState);

@@ -1,6 +1,6 @@
 import { defaultMenuItem } from "@/atoms/directoryMenuAtoms";
 import { auth } from "@/firebase/clientApp";
-import useDirectory from "@/hooks/useDirectoy";
+import useDirectory from "@/hooks/useDirectory";
 import { Flex, Image } from "@chakra-ui/react";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";

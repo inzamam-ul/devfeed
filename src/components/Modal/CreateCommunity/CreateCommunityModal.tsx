@@ -1,5 +1,5 @@
 import { auth, firestore } from "@/firebase/clientApp";
-import useDirectory from "@/hooks/useDirectoy";
+import useDirectory from "@/hooks/useDirectory";
 import {
   Box,
   Button,
@@ -73,7 +73,7 @@ const CreateCommunityModal: React.FC<CreateCommunityProps> = ({
         //check if community exits
         const communityDoc = await transaction.get(communityDocRef);
         if (communityDoc.exists()) {
-          throw new Error(`Sorry, dev/${communityName} is taken. Try another.`);
+          throw new Error(`Sorry, r/${communityName} is taken. Try another.`);
         }
 
         // Create community
@@ -96,7 +96,7 @@ const CreateCommunityModal: React.FC<CreateCommunityProps> = ({
 
       handleClose();
       toggleMenuOpen();
-      router.push(`dev/${communityName}`);
+      router.push(`r/${communityName}`);
     } catch (error: any) {
       console.log("handleCreateCommunity error", error);
       setError(error?.message);
@@ -135,7 +135,7 @@ const CreateCommunityModal: React.FC<CreateCommunityProps> = ({
                 width="20px"
                 color="gray.400"
               >
-                dev/
+                r/
               </Text>
               <Input
                 position="relative"
